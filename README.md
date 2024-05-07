@@ -1,6 +1,6 @@
 <p align="center"><br><img src="https://user-images.githubusercontent.com/236501/85893648-1c92e880-b7a8-11ea-926d-95355b8175c7.png" width="128" height="128" /></p>
 <h3 align="center">Capacitor Camera Preview</h3>
-<p align="center"><strong><code>@capacitor-community/camera-preview</code></strong></p>
+<p align="center"><strong><code>@keyhook/capacitor-camera-preview</code></strong></p>
 <br>
 <p align="center"><strong>CAPACITOR 5</strong></p><br>
 
@@ -38,11 +38,11 @@ If you are using Capacitor 2, use [version 1](https://github.com/capacitor-commu
 # Installation
 
 ```
-yarn add @capacitor-community/camera-preview
+yarn add @keyhook/capacitor-camera-preview
 
 or
 
-npm install @capacitor-community/camera-preview
+npm install @keyhook/capacitor-camera-preview
 ```
 Then run
 ```
@@ -69,7 +69,7 @@ You will need to add two permissions to `Info.plist`. Follow the [Capacitor docs
 
 ## Extra Web installation steps
 
-Add `import { CameraPreview } from '@capacitor-community/camera-preview';` in the file where you want to use the plugin.
+Add `import { CameraPreview } from '@keyhook/capacitor-camera-preview';` in the file where you want to use the plugin.
 
 then in html add `<div id="cameraPreview"></div>`
 
@@ -118,7 +118,7 @@ All options stated are optional and will default to values here
 * `disableExifHeaderStripping` - Defaults to false - **Android Only** - Disable automatic rotation of the image, and let the browser deal with it (keep reading on how to achieve it) -->
 
 ```javascript
-import { CameraPreview, CameraPreviewOptions } from '@capacitor-community/camera-preview';
+import { CameraPreview, CameraPreviewOptions } from '@keyhook/capacitor-camera-preview';
 
 const cameraPreviewOptions: CameraPreviewOptions = {
   position: 'rear',
@@ -217,7 +217,7 @@ CameraPreview.hide();
 <!-- <info>Take the picture. If width and height are not specified or are 0 it will use the defaults. If width and height are specified, it will choose a supported photo size that is closest to width and height specified and has closest aspect ratio to the preview. The argument `quality` defaults to `85` and specifies the quality/compression value: `0=max compression`, `100=max quality`.</info><br/> -->
 
 ```javascript
-import { CameraPreviewPictureOptions } from '@capacitor-community/camera-preview';
+import { CameraPreviewPictureOptions } from '@keyhook/capacitor-camera-preview';
 
 const cameraPreviewPictureOptions: CameraPreviewPictureOptions = {
   quality: 50
@@ -239,7 +239,7 @@ const base64PictureData = result.value;
 <info>Captures a sample image from the video stream. Only for Android and iOS, web implementation falls back to `capture` method. This can be used to perform real-time analysis on the current frame in the video. The argument `quality` defaults to `85` and specifies the quality/compression value: `0=max compression`, `100=max quality`.</info><br/>
 
 ```javascript
-import { CameraSampleOptions } from '@capacitor-community/camera-preview';
+import { CameraSampleOptions } from '@keyhook/capacitor-camera-preview';
 
 const cameraSampleOptions: CameraSampleOptions = {
   quality: 50
@@ -257,7 +257,7 @@ const base64PictureData = result.value;
 <info>Get the flash modes supported by the camera device currently started. Returns an array containing supported flash modes. See <code>[FLASH_MODE](#camera_Settings.FlashMode)</code> for possible values that can be returned</info><br/>
 
 ```javascript
-import { CameraPreviewFlashMode } from '@capacitor-community/camera-preview';
+import { CameraPreviewFlashMode } from '@keyhook/capacitor-camera-preview';
 
 const flashModes = await CameraPreview.getSupportedFlashModes();
 const supportedFlashModes: CameraPreviewFlashMode[] = flashModes.result;

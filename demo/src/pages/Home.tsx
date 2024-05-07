@@ -8,7 +8,7 @@ import {
 } from "@ionic/react";
 import React, { useState } from "react";
 import "./Home.css";
-import { CameraPreview, CameraSampleOptions } from '@capacitor-community/camera-preview';
+import { CameraPreview, CameraSampleOptions } from '@keyhook/capacitor-camera-preview';
 
 
 const Home: React.FC = () => {

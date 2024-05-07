@@ -1,5 +1,5 @@
 {
-  "name": "@capacitor-community/camera-preview",
+  "name": "@keyhook/capacitor-camera-preview",
   "version": "5.0.0",
   "description": "Camera preview",
   "main": "dist/plugin.cjs.js",

@@ -1,6 +1,6 @@
 [
 	{
-		"pkg": "@capacitor-community/camera-preview",
+		"pkg": "@keyhook/capacitor-camera-preview",
 		"classpath": "com.ahm.capacitor.camera.preview.CameraPreview"
 	}
 ]

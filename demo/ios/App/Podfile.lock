@@ -7,14 +7,14 @@ PODS:
 
 DEPENDENCIES:
   - "Capacitor (from `../../node_modules/@capacitor/ios`)"
-  - "CapacitorCommunityCameraPreview (from `../../node_modules/@capacitor-community/camera-preview`)"
+  - "CapacitorCommunityCameraPreview (from `../../node_modules/@keyhook/capacitor-camera-preview`)"
   - "CapacitorCordova (from `../../node_modules/@capacitor/ios`)"
 
 EXTERNAL SOURCES:
   Capacitor:
     :path: "../../node_modules/@capacitor/ios"
   CapacitorCommunityCameraPreview:
-    :path: "../../node_modules/@capacitor-community/camera-preview"
+    :path: "../../node_modules/@keyhook/capacitor-camera-preview"
   CapacitorCordova:
     :path: "../../node_modules/@capacitor/ios"
 
