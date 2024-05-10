@@ -136,11 +136,11 @@ public class CameraPreview: CAPPlugin {
     }
     // Get user's cache directory path
     @objc func getTempFilePath() -> URL {
-        let path = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let identifier = UUID()
         let randomIdentifier = identifier.uuidString.replacingOccurrences(of: "-", with: "")
         let finalIdentifier = String(randomIdentifier.prefix(8))
-        let fileName="cpcp_capture_"+finalIdentifier+".jpg"
+        let fileName="image_"+finalIdentifier+".jpg"
         let fileUrl=path.appendingPathComponent(fileName)
         return fileUrl
     }
