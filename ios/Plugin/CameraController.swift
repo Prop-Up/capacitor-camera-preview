@@ -414,11 +414,11 @@ extension CameraController {
             completion(CameraControllerError.captureSessionIsMissing)
             return
         }
-        let path = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let identifier = UUID()
         let randomIdentifier = identifier.uuidString.replacingOccurrences(of: "-", with: "")
         let finalIdentifier = String(randomIdentifier.prefix(8))
-        let fileName="cpcp_video_"+finalIdentifier+".mp4"
+        let fileName="video_"+finalIdentifier+".mp4"
 
         let fileUrl = path.appendingPathComponent(fileName)
         try? FileManager.default.removeItem(at: fileUrl)
