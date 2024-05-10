@@ -522,7 +522,7 @@ public class CameraActivity extends Fragment {
     }
 
     private String getTempFilePath() {
-        return getTempDirectoryPath() + "/cpcp_capture_" + UUID.randomUUID().toString().replace("-", "").substring(0, 8) + ".jpg";
+        return getTempDirectoryPath() + "/media_" + UUID.randomUUID().toString().replace("-", "").substring(0, 8) + ".jpg";
     }
 
     PictureCallback jpegPictureCallback = new PictureCallback() {
