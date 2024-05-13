@@ -196,11 +196,11 @@ public class CameraPreview extends Plugin implements CameraActivity.CameraPrevie
     @PluginMethod
     public void startRecordVideo(final PluginCall call) {
         if (this.hasCamera(call) == false) {
-            call.reject("Camera is not running");
+            call.reject("Camera is not running!");
             return;
         }
-        final String filename = "videoTmp";
-        VIDEO_FILE_PATH = getActivity().getCacheDir().toString() + "/";
+        final String filename = "captured_media";
+        VIDEO_FILE_PATH = getActivity().getFilesDir().toString() + "/";
 
         final String position = call.getString("position", "front");
         final Integer width = call.getInt("width", 0);
