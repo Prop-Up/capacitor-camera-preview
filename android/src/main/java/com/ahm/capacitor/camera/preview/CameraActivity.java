@@ -510,10 +510,10 @@ public class CameraActivity extends Fragment {
         return 0;
     }
 
-    private String getTempDirectoryPath() {
+    private String getDirectoryPath() {
         File cache = null;
 
-        // Use internal storage
+        // Use persisted internal storage
         cache = getActivity().getCacheDir();
 
         // Create the cache directory if it doesn't exist
@@ -521,8 +521,8 @@ public class CameraActivity extends Fragment {
         return cache.getAbsolutePath();
     }
 
-    private String getTempFilePath() {
-        return getTempDirectoryPath() + "/media_" + UUID.randomUUID().toString().replace("-", "").substring(0, 8) + ".jpg";
+    private String getFilePath() {
+        return getDirectoryPath() + "/captured_media_" + UUID.randomUUID().toString().replace("-", "").substring(0, 8) + ".jpg";
     }
 
     PictureCallback jpegPictureCallback = new PictureCallback() {
@@ -560,7 +560,7 @@ public class CameraActivity extends Fragment {
 
                     eventListener.onPictureTaken(encodedImage);
                 } else {
-                    String path = getTempFilePath();
+                    String path = getFilePath();
                     FileOutputStream out = new FileOutputStream(path);
                     out.write(data);
                     out.close();
@@ -871,7 +871,13 @@ public class CameraActivity extends Fragment {
 
             mRecorder.prepare();
             Log.d(TAG, "Starting recording");
-            mRecorder.start();
+            mCamera.lock();  // Ensure camera is locked before starting the recorder
+            try {
+                mRecorder.start();
+            } catch (IllegalStateException e) {
+                Log.e(TAG, "Failed to start media recorder. Ensure camera is ready before starting. Error: " + e.getMessage());
+                mCamera.unlock();  // Unlock camera if starting recorder fails
+            }
             eventListener.onStartRecordVideo();
         } catch (IOException e) {
             eventListener.onStartRecordVideoError(e.getMessage());
