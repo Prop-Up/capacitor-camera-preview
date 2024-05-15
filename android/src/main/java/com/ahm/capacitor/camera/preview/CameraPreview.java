@@ -205,8 +205,8 @@ public class CameraPreview extends Plugin implements CameraActivity.CameraPrevie
         final String position = call.getString("position", "front");
         // final Integer width = call.getInt("width", 0);
         // final Integer height = call.getInt("height", 0);
-        final Integer width = call.getInt("width", 1080);
-        final Integer height = call.getInt("height", 1920);
+        final Integer width = 1080;
+        final Integer height = 1920;
         final Boolean withFlash = call.getBoolean("withFlash", false);
         final Integer maxDuration = call.getInt("maxDuration", 0);
         // final Integer quality = call.getInt("quality", 0);
