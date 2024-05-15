@@ -862,12 +862,14 @@ public class CameraActivity extends Fragment {
             //     }
             // }
 
-            Camera.Parameters parameters = mCamera.getParameters();
-            List<Camera.Size> mSupportedVideoSizes = parameters.getSupportedVideoSizes();
-            CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
-            profile.videoFrameWidth = width;
-            profile.videoFrameHeight = height;
-            mRecorder.setProfile(profile);
+            List<Camera.Size> mSupportedVideoSizes = cameraParams.getSupportedVideoSizes();
+            if (mSupportedVideoSizes != null && !mSupportedVideoSizes.isEmpty()) {
+                Camera.Size firstSupportedSize = mSupportedVideoSizes.get(0);
+                CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
+                profile.videoFrameWidth = firstSupportedSize.width;
+                profile.videoFrameHeight = firstSupportedSize.height;
+                mRecorder.setProfile(profile);
+            }
 
             mRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
             mRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
