@@ -862,6 +862,10 @@ public class CameraActivity extends Fragment {
             //     }
             // }
 
+            
+
+            mRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
+            mRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
             List<Camera.Size> mSupportedVideoSizes = cameraParams.getSupportedVideoSizes();
             if (mSupportedVideoSizes != null && !mSupportedVideoSizes.isEmpty()) {
                 Camera.Size firstSupportedSize = mSupportedVideoSizes.get(0);
@@ -870,9 +874,6 @@ public class CameraActivity extends Fragment {
                 profile.videoFrameHeight = firstSupportedSize.height;
                 mRecorder.setProfile(profile);
             }
-
-            mRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
-            mRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
             mRecorder.setOutputFile(filePath);
             mRecorder.setOrientationHint(mOrientationHint);
             mRecorder.setMaxDuration(maxDuration);
