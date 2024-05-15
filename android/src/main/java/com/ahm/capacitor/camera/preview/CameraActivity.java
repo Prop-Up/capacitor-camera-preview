@@ -843,24 +843,24 @@ public class CameraActivity extends Fragment {
         try {
             mRecorder.setCamera(mCamera);
 
-            CamcorderProfile profile;
-            if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_HIGH)) {
-                profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_HIGH);
-            } else {
-                if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_480P)) {
-                    profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_480P);
-                } else {
-                    if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_720P)) {
-                        profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_720P);
-                    } else {
-                        if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_1080P)) {
-                            profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_1080P);
-                        } else {
-                            profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_LOW);
-                        }
-                    }
-                }
-            }
+            // CamcorderProfile profile;
+            // if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_HIGH)) {
+            //     profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_HIGH);
+            // } else {
+            //     if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_480P)) {
+            //         profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_480P);
+            //     } else {
+            //         if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_720P)) {
+            //             profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_720P);
+            //         } else {
+            //             if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_1080P)) {
+            //                 profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_1080P);
+            //             } else {
+            //                 profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_LOW);
+            //             }
+            //         }
+            //     }
+            // }
 
             Camera.Parameters parameters = mCamera.getParameters();
             List<Camera.Size> mSupportedVideoSizes = parameters.getSupportedVideoSizes();
