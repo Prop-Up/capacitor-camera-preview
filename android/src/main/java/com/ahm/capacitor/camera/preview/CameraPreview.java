@@ -203,10 +203,8 @@ public class CameraPreview extends Plugin implements CameraActivity.CameraPrevie
         VIDEO_FILE_PATH = getActivity().getFilesDir().toString() + "/";
 
         final String position = call.getString("position", "front");
-        // final Integer width = call.getInt("width", 0);
-        // final Integer height = call.getInt("height", 0);
-        final Integer width = 1080;
-        final Integer height = 1920;
+        final Integer width = call.getInt("width", 0);
+        final Integer height = call.getInt("height", 0);
         final Boolean withFlash = call.getBoolean("withFlash", false);
         final Integer maxDuration = call.getInt("maxDuration", 0);
         // final Integer quality = call.getInt("quality", 0);
@@ -219,6 +217,7 @@ public class CameraPreview extends Plugin implements CameraActivity.CameraPrevie
                 new Runnable() {
                     @Override
                     public void run() {
+                        // fragment.startRecord(getFilePath(filename), position, width, height, quality, withFlash);
                         fragment.startRecord(getFilePath(filename), position, width, height, 70, withFlash, maxDuration);
                     }
                 }

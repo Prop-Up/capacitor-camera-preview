@@ -843,52 +843,41 @@ public class CameraActivity extends Fragment {
         try {
             mRecorder.setCamera(mCamera);
 
-            // CamcorderProfile profile;
-            // if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_HIGH)) {
-            //     profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_HIGH);
-            // } else {
-            //     if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_480P)) {
-            //         profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_480P);
-            //     } else {
-            //         if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_720P)) {
-            //             profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_720P);
-            //         } else {
-            //             if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_1080P)) {
-            //                 profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_1080P);
-            //             } else {
-            //                 profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_LOW);
-            //             }
-            //         }
-            //     }
-            // }
-
-            
+            CamcorderProfile profile;
+            if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_HIGH)) {
+                profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_HIGH);
+            } else {
+                if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_480P)) {
+                    profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_480P);
+                } else {
+                    if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_720P)) {
+                        profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_720P);
+                    } else {
+                        if (CamcorderProfile.hasProfile(defaultCameraId, CamcorderProfile.QUALITY_1080P)) {
+                            profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_1080P);
+                        } else {
+                            profile = CamcorderProfile.get(defaultCameraId, CamcorderProfile.QUALITY_LOW);
+                        }
+                    }
+                }
+            }
 
             mRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
             mRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-            List<Camera.Size> mSupportedVideoSizes = cameraParams.getSupportedVideoSizes();
-            if (mSupportedVideoSizes != null && !mSupportedVideoSizes.isEmpty()) {
-                Camera.Size firstSupportedSize = mSupportedVideoSizes.get(0);
-                CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
-                profile.videoFrameWidth = firstSupportedSize.width;
-                profile.videoFrameHeight = firstSupportedSize.height;
-                mRecorder.setProfile(profile);
-            }
+            mRecorder.setProfile(profile);
+            mRecorder.setVideoSize(1920, 1080);
             mRecorder.setOutputFile(filePath);
             mRecorder.setOrientationHint(mOrientationHint);
             mRecorder.setMaxDuration(maxDuration);
 
             mRecorder.prepare();
             Log.d(TAG, "Starting recording");
-            mCamera.lock();  // Ensure camera is locked before starting the recorder
             try {
-
                 mRecorder.start();
+                eventListener.onStartRecordVideo();
             } catch (IllegalStateException e) {
                 Log.e(TAG, "Failed to start media recorder. Ensure camera is ready before starting. Error: " + e.getMessage());
-                mCamera.unlock();  // Unlock camera if starting recorder fails
             }
-            eventListener.onStartRecordVideo();
         } catch (IOException e) {
             eventListener.onStartRecordVideoError(e.getMessage());
         }
