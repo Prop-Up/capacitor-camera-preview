@@ -219,9 +219,7 @@ public class CameraPreview extends Plugin implements CameraActivity.CameraPrevie
                 new Runnable() {
                     @Override
                     public void run() {
-                        // fragment.startRecord(getFilePath(filename), position, width, height, quality, withFlash);
-                        Camera.Size optimalSize = fragment.getOptimalVideoSize();
-                        fragment.startRecord(getFilePath(filename), position, optimalSize.width, optimalSize.height, 70, withFlash, maxDuration);
+                        fragment.startRecord(getFilePath(filename), position, width, height, 70, withFlash, maxDuration);
                     }
                 }
             );

@@ -862,9 +862,15 @@ public class CameraActivity extends Fragment {
                 }
             }
 
+            Camera.Parameters parameters = mCamera.getParameters();
+            List<Camera.Size> mSupportedVideoSizes = parameters.getSupportedVideoSizes();
+            CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_HIGH);
+            profile.videoFrameWidth = width;
+            profile.videoFrameHeight = height;
+            mRecorder.setProfile(profile);
+
             mRecorder.setAudioSource(MediaRecorder.AudioSource.VOICE_RECOGNITION);
             mRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-            mRecorder.setProfile(profile);
             mRecorder.setOutputFile(filePath);
             mRecorder.setOrientationHint(mOrientationHint);
             mRecorder.setMaxDuration(maxDuration);
@@ -873,6 +879,7 @@ public class CameraActivity extends Fragment {
             Log.d(TAG, "Starting recording");
             mCamera.lock();  // Ensure camera is locked before starting the recorder
             try {
+
                 mRecorder.start();
             } catch (IllegalStateException e) {
                 Log.e(TAG, "Failed to start media recorder. Ensure camera is ready before starting. Error: " + e.getMessage());
