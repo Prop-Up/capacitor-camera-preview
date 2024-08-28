@@ -799,7 +799,11 @@ public class CameraActivity extends Fragment {
                     }
 
                     mCamera.setParameters(params);
-                    mCamera.takePicture(shutterCallback, null, jpegPictureCallback);
+                    try {
+                        mCamera.takePicture(shutterCallback, null, jpegPictureCallback);
+                    } catch (Exception e) {
+                        Log.d(TAG, "CameraPreview takePicture general exception");
+                    }
                 }
             }
                 .start();
