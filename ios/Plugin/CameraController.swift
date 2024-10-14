@@ -48,24 +48,34 @@ extension CameraController {
 
         func configureCaptureDevices() throws {
 
-            let session = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTripleCamera], mediaType: AVMediaType.video, position: .unspecified)
+            let session = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTripleCamera, .builtInDualCamera, .builtInWideAngleCamera], mediaType: AVMediaType.video, position: .unspecified)
 
             let cameras = session.devices.compactMap { $0 }
             guard !cameras.isEmpty else { throw CameraControllerError.noCamerasAvailable }
 
-            for camera in cameras {
-                if camera.position == .front {
-                    self.frontCamera = camera
+                var selectedRearCamera: AVCaptureDevice?
+                let rearCameraPriority: [AVCaptureDevice.DeviceType] = [.builtInTripleCamera, .builtInDualCamera, .builtInWideAngleCamera]
+
+                for camera in cameras {
+                    if camera.position == .front {
+                        self.frontCamera = camera
+                    }
+
+                    if camera.position == .back {
+                         // Rear camera selection based on device type priority
+                        if selectedRearCamera == nil || (rearCameraPriority.firstIndex(of: camera.deviceType) ?? Int.max) < (rearCameraPriority.firstIndex(of: selectedRearCamera!.deviceType) ?? Int.max) {
+                            selectedRearCamera = camera
+                        }
+                    }
                 }
 
-                if camera.position == .back {
-                    self.rearCamera = camera
-
-                    try camera.lockForConfiguration()
-                    camera.focusMode = .continuousAutoFocus
-                    camera.unlockForConfiguration()
+                // After selecting the best rear camera, configure it
+                if let rearCamera = selectedRearCamera {
+                    self.rearCamera = rearCamera
+                    try? rearCamera.lockForConfiguration()
+                    rearCamera.focusMode = .continuousAutoFocus
+                    rearCamera.unlockForConfiguration()
                 }
-            }
             if disableAudio == false {
                 self.audioDevice = AVCaptureDevice.default(for: AVMediaType.audio)
             }
